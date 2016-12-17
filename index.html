@@ -24,17 +24,27 @@
 	Coding is <div id="magic"></div>
 
 	<script>
-
+		var space = String.fromCharCode(160); //Create non-breaking space character
+		
 		var words = ["fun", "exciting", "about not giving up", "being helpful", "being open", "what I learned at CodingDojo!"],
 			el = document.getElementById('magic'),
 			word_counter = 0,
 			character_counter = 0;
-
+		//Loop through array and fix strings with the space variable
+		for(var i=0;i<words.length;i++){
+			var strArr = words[i].split('');
+			for(var j = 0; j < strArr.length; j++){
+				if(strArr[j]=== ' '){
+					strArr[j] = space;
+				}
+			}
+			words[i]=strArr.join('');
+		}
 		function updateText()
 		{
 			el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
 
-			if(character_counter == words[word_counter].length)
+			if(character_counter > words[word_counter].length)
 			{
 				word_counter++; 	//choose a different word
 				character_counter = 0;	//start over with the first character of the word
@@ -46,7 +56,7 @@
 			}
 		}
 
-		setInterval(updateText,300);
+		setInterval(updateText,200);
 
 	</script>
 
